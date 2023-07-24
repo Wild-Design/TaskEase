@@ -8,8 +8,8 @@ server.use(express.json());
 server.use(morgan('dev'));
 server.use(cors({ origin: '*' }));
 
-server.get('/', (req: Request, res: Response) => {
-  res.status(200).send('Ta funcionando el server :D');
+server.get('/', (_: Request, res: Response) => {
+  res.status(200).send('Bienvenido a TaskEase :D');
 });
 
 export default server;
