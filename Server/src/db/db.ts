@@ -20,7 +20,6 @@ export const { User, List, Task } = sequelize.models;
 User.beforeCreate(async (user: any) => {
   const hashPassword = await bcrypt.hash(user.password, 10);
   user.password = hashPassword;
-  console.log(user);
 });
 
 User.hasMany(List);

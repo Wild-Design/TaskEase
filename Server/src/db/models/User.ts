@@ -1,7 +1,8 @@
 import { Sequelize, UUIDV4, DataTypes } from 'sequelize';
+import { IUserModel } from '../../interfaces/index.js';
 
 export default (sequelize: Sequelize) => {
-  sequelize.define(
+  sequelize.define<IUserModel>(
     'User',
     {
       id: {
@@ -9,9 +10,10 @@ export default (sequelize: Sequelize) => {
         primaryKey: true,
         defaultValue: UUIDV4,
       },
-      name: {
+      user_name: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
       email: {
         type: DataTypes.STRING,
@@ -21,6 +23,18 @@ export default (sequelize: Sequelize) => {
       password: {
         type: DataTypes.TEXT,
         allowNull: false,
+      },
+      first_name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      last_name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      age: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
       },
     },
     { timestamps: false }

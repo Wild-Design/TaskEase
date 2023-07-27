@@ -1,9 +1,16 @@
-export interface User {
-  name: string;
+import { Model } from 'sequelize';
+export interface IUser {
+  user_name: string;
   email: string;
-  password: string;
+  password: string | number;
 }
 
-export interface UserDb extends User {
+export interface IUserModel extends Model {
   id: string;
+  user_name: string;
+  email: string;
+  password: string;
+  first_name: string | null;
+  last_name: string | null;
+  age: number | null;
 }

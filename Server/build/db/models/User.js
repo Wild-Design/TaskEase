@@ -6,9 +6,10 @@ export default (sequelize) => {
             primaryKey: true,
             defaultValue: UUIDV4,
         },
-        name: {
+        user_name: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
         },
         email: {
             type: DataTypes.STRING,
@@ -18,6 +19,18 @@ export default (sequelize) => {
         password: {
             type: DataTypes.TEXT,
             allowNull: false,
+        },
+        first_name: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        last_name: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        age: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
         },
     }, { timestamps: false });
 };
