@@ -6,7 +6,7 @@ export default (sequelize) => {
             primaryKey: true,
             defaultValue: UUIDV4,
         },
-        name: {
+        description: {
             type: DataTypes.STRING,
             allowNull: false,
         },

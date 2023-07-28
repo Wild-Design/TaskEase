@@ -48,7 +48,7 @@ export const login = async (req, res) => {
             if (passwordCompare)
                 return res.status(200).send(searchUserName);
         }
-        return res.status(404).send('incorrect credentials');
+        return res.status(404).send('Incorrect credentials');
     }
     catch (error) {
         res

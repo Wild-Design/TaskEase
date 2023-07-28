@@ -18,7 +18,7 @@ export const createList = async (req: Request, res: Response) => {
       const newList = await List.create({ name: listName, UserId: UserId });
       res.status(200).send(newList);
     } else {
-      return res.status(404).send('unauthenticated user');
+      return res.status(401).send('Unauthenticated user');
     }
   } catch (error: any) {
     res

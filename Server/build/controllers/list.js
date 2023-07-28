@@ -15,7 +15,7 @@ export const createList = async (req, res) => {
             res.status(200).send(newList);
         }
         else {
-            return res.status(404).send('unauthenticated user');
+            return res.status(401).send('Unauthenticated user');
         }
     }
     catch (error) {
