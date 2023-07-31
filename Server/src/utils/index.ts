@@ -10,7 +10,7 @@ export const authenticated = async (user_name: string, password: string) => {
       password,
       searchUserName.password
     );
-    if (passwordCompare) return true;
+    if (passwordCompare) return searchUserName.id; //el id lo utilizo para hacer mas seguros otros endpoints como los de borrar listas y tareas
   }
   return false;
 };

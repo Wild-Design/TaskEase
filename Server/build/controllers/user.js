@@ -1,5 +1,5 @@
-import { User } from '../db/db.js';
-import bcrypt from 'bcrypt';
+import { User, List, Task } from '../db/db.js';
+import { authenticated } from '../utils/index.js';
 export const getUser = async (_, res) => {
     try {
         const getUsers = await User.findAll();
@@ -15,7 +15,7 @@ export const register = async (req, res) => {
         if (!user_name || !password || !email) {
             return res
                 .status(404)
-                .send('¡userName, email and password are required!');
+                .send('¡user_name, email and password are required!');
         }
         const searchUserName = await User.findOne({ where: { user_name } });
         if (searchUserName) {
@@ -40,13 +40,24 @@ export const login = async (req, res) => {
         if (!user_name || !password) {
             return res.status(404).send('¡userName and password are required!');
         }
-        const searchUserName = await User.findOne({
-            where: { user_name },
-        });
-        if (searchUserName) {
-            const passwordCompare = await bcrypt.compare(password, searchUserName.password);
-            if (passwordCompare)
-                return res.status(200).send(searchUserName);
+        const isAutenticated = await authenticated(user_name, password);
+        if (isAutenticated) {
+            const user = await User.findOne({
+                where: { user_name },
+                include: [
+                    {
+                        model: List,
+                        include: [
+                            {
+                                model: Task,
+                                // Excluimos el campo ListId de las tareas porque rompe mucho los huevos y no lo voy a usar
+                                attributes: { exclude: ['ListId'] },
+                            },
+                        ],
+                    },
+                ],
+            });
+            return res.status(200).send(user);
         }
         return res.status(404).send('Incorrect credentials');
     }

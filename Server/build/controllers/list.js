@@ -1,5 +1,5 @@
 import { authenticated } from '../utils/index.js';
-import { List } from '../db/db.js';
+import { List, Task } from '../db/db.js';
 export const getList = (_, res) => {
     res.status(200).send('getList');
 };
@@ -17,6 +17,28 @@ export const createList = async (req, res) => {
         else {
             return res.status(401).send('Unauthenticated user');
         }
+    }
+    catch (error) {
+        res
+            .status(500)
+            .send({ error: 'Internal server error', message: error.message });
+    }
+};
+export const deleteList = async (req, res) => {
+    const { listId } = req.params;
+    const { user_name, password } = req.body;
+    try {
+        const isAutenticated = await authenticated(user_name, password);
+        if (isAutenticated) {
+            const getList = await List.findByPk(listId);
+            const userId = isAutenticated;
+            if (userId === getList.UserId) {
+                const deleteTasks = await Task.destroy({ where: { ListId: listId } });
+                const deleteList = await List.destroy({ where: { id: listId } });
+                return res.status(200).send({ deleteTasks, deleteList });
+            }
+        }
+        return res.status(401).send('Unauthenticated user');
     }
     catch (error) {
         res

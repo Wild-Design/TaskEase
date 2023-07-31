@@ -1,8 +1,8 @@
 import { Model } from 'sequelize';
-export interface IUser {
+export interface IRegister {
   user_name: string;
   email: string;
-  password: string | number;
+  password: string;
 }
 
 export interface IUserModel extends Model {
