@@ -31,7 +31,12 @@ export const deleteList = async (req, res) => {
         const isAutenticated = await authenticated(user_name, password);
         if (isAutenticated) {
             const getList = await List.findByPk(listId);
+            if (!getList) {
+                return res.status(400).send('There is no list with that id');
+            }
             const userId = isAutenticated;
+            //Compruevo el id del usuario autenticado con el id del usuario del listId
+            //para evitar posibles hakeos, solo se puede borrar las listas de los usuarios autenticados.
             if (userId === getList.UserId) {
                 const deleteTasks = await Task.destroy({ where: { ListId: listId } });
                 const deleteList = await List.destroy({ where: { id: listId } });
