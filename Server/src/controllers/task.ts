@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import { authenticated } from '../utils/index.js';
 import { Task } from '../db/db.js';
 
-export const getTask = (_: Request, res: Response) => {
-  res.status(200).send('getTask');
+export const getTask = async (_: Request, res: Response) => {
+  res.status(200).send(await Task.findAll());
 };
 
 export const createTask = async (req: Request, res: Response) => {
@@ -18,6 +18,27 @@ export const createTask = async (req: Request, res: Response) => {
       if (createTask) {
         return res.status(201).send(createTask);
       }
+    }
+    return res.status(401).send('Unauthenticated user');
+  } catch (error: any) {
+    res
+      .status(500)
+      .send({ error: 'Internal server error', message: error.message });
+  }
+};
+
+export const deleteTask = async (req: Request, res: Response) => {
+  const { taskId } = req.params;
+  const { user_name, password } = req.body;
+  try {
+    const isAutenticated = await authenticated(user_name, password);
+    if (isAutenticated) {
+      const getTask = await Task.findByPk(taskId);
+      if (!getTask) {
+        return res.status(400).send('The task with that id does not exist');
+      }
+      const deleteTask = await Task.destroy({ where: { id: taskId } });
+      return res.status(200).send({ deleteTask });
     }
     return res.status(401).send('Unauthenticated user');
   } catch (error: any) {

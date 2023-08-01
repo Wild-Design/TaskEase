@@ -34,7 +34,6 @@ export const deleteList = async (req: Request, res: Response) => {
     const isAutenticated = await authenticated(user_name, password);
     if (isAutenticated) {
       const getList: any = await List.findByPk(listId);
-
       if (!getList) {
         return res.status(400).send('There is no list with that id');
       }
