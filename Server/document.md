@@ -28,4 +28,14 @@ POST: /task (Crea nueva taea, resive por body los campos obligatorios { ListId: 
 
 DELETE: /list/:listId (Borra la lista seleccionada y todas las tareas pertenecientes a esa lista): datos obligatorio: id de la lista por params, y por body {user_name,password}
 
+<!-- ------------------------------------------------------------- -->
+
 DELETE: /task/:taskId (Bora una tarea), se nececita el id de la tarea por params y por body {user_name,password}
+
+<!-- ------------------------------------------------------------- -->
+
+PUT /list (actualiza el nombre de una lista): recive obligatoriamente por body {user_name,password,ListId,description}
+
+<!-- ------------------------------------------------------------- -->
+
+PUT /task/:taskId (actualiza la descripción de una tarea) recive obligatoriamente por body{user_name,password,description} y por params el id de la tarea a actualizar

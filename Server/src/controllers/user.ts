@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { User, List, Task } from '../db/db.js';
 import { IRegister } from '../interfaces/index.js';
 import { authenticated } from '../utils/index.js';
+import { Model } from 'sequelize';
 
 export const getUser = async (_: Request, res: Response) => {
   try {
@@ -20,11 +21,13 @@ export const register = async (req: Request, res: Response) => {
         .status(404)
         .send('¡user_name, email and password are required!');
     }
-    const searchUserName = await User.findOne({ where: { user_name } });
+    const searchUserName: Model | null = await User.findOne({
+      where: { user_name },
+    });
     if (searchUserName) {
       return res.status(404).send('This username is already in use');
     }
-    const searchEmail = await User.findOne({ where: { email } });
+    const searchEmail: Model | null = await User.findOne({ where: { email } });
     if (searchEmail) {
       return res.status(404).send('This email is already in use');
     }
@@ -47,7 +50,7 @@ export const login = async (req: Request, res: Response) => {
     }
     const isAutenticated = await authenticated(user_name, password);
     if (isAutenticated) {
-      const user = await User.findOne({
+      const user: Model | null = await User.findOne({
         where: { user_name },
         include: [
           {
@@ -60,7 +63,7 @@ export const login = async (req: Request, res: Response) => {
               },
             ],
           },
-        ],
+        ], 
       });
       return res.status(200).send(user);
     }

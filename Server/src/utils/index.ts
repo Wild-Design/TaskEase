@@ -1,7 +1,10 @@
 import { User } from '../db/db.js';
 import bcrypt from 'bcrypt';
 
-export const authenticated = async (user_name: string, password: string) => {
+export const authenticated = async (
+  user_name: string,
+  password: string
+): Promise<boolean | string> => {
   const searchUserName: any = await User.findOne({
     where: { user_name },
   });

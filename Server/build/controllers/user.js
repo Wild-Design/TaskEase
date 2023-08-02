@@ -17,7 +17,9 @@ export const register = async (req, res) => {
                 .status(404)
                 .send('¡user_name, email and password are required!');
         }
-        const searchUserName = await User.findOne({ where: { user_name } });
+        const searchUserName = await User.findOne({
+            where: { user_name },
+        });
         if (searchUserName) {
             return res.status(404).send('This username is already in use');
         }
