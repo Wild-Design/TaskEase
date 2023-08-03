@@ -1,8 +1,8 @@
 import { User } from '../db/db.js';
 import bcrypt from 'bcrypt';
-export const authenticated = async (user_name, password) => {
+export const authenticated = async (userName, password) => {
     const searchUserName = await User.findOne({
-        where: { user_name },
+        where: { user_name: userName },
     });
     if (searchUserName) {
         const passwordCompare = await bcrypt.compare(password, searchUserName.password);

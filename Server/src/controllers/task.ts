@@ -81,3 +81,7 @@ export const updateTaskName = async (req: Request, res: Response) => {
       .send({ error: 'Internal server error', message: error.message });
   }
 };
+
+export const transferTask = async (_req: Request, res: Response) => {
+  res.status(200).send('Ciciciciciciiiciciii');
+};

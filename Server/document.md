@@ -1,22 +1,17 @@
 <!-- ------------------------------------------------------------- -->
 
-GET: /user (Get de todos los usuarios)
-
-<!-- ------------------------------------------------------------- -->
-
 POST: /user/register (Registrar usuario)
 Nececita por body el objeto con estos campos obligatórios:
 {user_name:(string), password:(string), email:(string)}
 
 <!-- ------------------------------------------------------------- -->
 
-GET: /user/login (Loguear usuario, si el usuario se loguea correctamente, se le envia todas sus Listas y tareas)
-Nececita por body el objeto con estos campos obligatorios:
-{user_name: (string), password: (string) }
+GET: /user/login/:userName/:password (Loguear usuario, si el usuario se loguea correctamente, se le envia todas sus Listas y tareas)
+Nececita por params el nombre del usuario y el password.
 
 <!-- ------------------------------------------------------------- -->
 
-POST: /:listName (Crea nueva lista, recive por params
+POST: list/:listName (Crea nueva lista, recive por params
 el nombre de la lista deseada y también recive por body los campos obligatorios
 { UserId: (string), user_name: (string), password: (string) })
 
@@ -34,7 +29,7 @@ DELETE: /task/:taskId (Bora una tarea), se nececita el id de la tarea por params
 
 <!-- ------------------------------------------------------------- -->
 
-PUT /list (actualiza el nombre de una lista): recive obligatoriamente por body {user_name,password,ListId,description}
+PUT /list/:listId (actualiza el nombre de una lista): recive obligatoriamente por body {user_name,password,description} y por params el id de la lista
 
 <!-- ------------------------------------------------------------- -->
 

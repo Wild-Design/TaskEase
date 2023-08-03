@@ -37,15 +37,16 @@ export const register = async (req, res) => {
     }
 };
 export const login = async (req, res) => {
-    const { user_name, password } = req.body;
+    const { userName, password } = req.params;
+    console.log(userName, password);
     try {
-        if (!user_name || !password) {
+        if (!userName || !password) {
             return res.status(404).send('¡userName and password are required!');
         }
-        const isAutenticated = await authenticated(user_name, password);
+        const isAutenticated = await authenticated(userName, password);
         if (isAutenticated) {
             const user = await User.findOne({
-                where: { user_name },
+                where: { user_name: userName },
                 include: [
                     {
                         model: List,
