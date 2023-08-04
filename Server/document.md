@@ -34,3 +34,8 @@ PUT /list/:listId (actualiza el nombre de una lista): recive obligatoriamente po
 <!-- ------------------------------------------------------------- -->
 
 PUT /task/:taskId (actualiza la descripción de una tarea) recive obligatoriamente por body{user_name,password,description} y por params el id de la tarea a actualizar
+
+<!-- -------------------------------------------------------------- -->
+
+PUT /:taskId/:destinationListId (cambia una tarea de la lista actual a la seleccionada) recive por params el
+id de la tarea a mover, y el d de la lista de destino, y por body nececita {user_name,password}

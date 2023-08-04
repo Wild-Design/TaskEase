@@ -14,6 +14,13 @@ export const getUser = async (_: Request, res: Response) => {
 };
 
 export const register = async (req: Request, res: Response) => {
+  /*
+  Primero compruevo que si o si me llegue por body el user_name, password y email, luego compruevo si cumplen con el test de expreciones regulares para validar
+  de que no tengan caracteres raros o que el mail no sea cualquier cosa y todo eso.
+  Luego, si los datos estan bien entonces busco el usuario en la db, (si el usuario existe entonces no deberia crearse y por eso respondo con un 404 de que el usuario ya existe,
+  la misma lógica hago con el email porque debe haber un solo email).
+  Entonces si pasa todo esto correctamente se crea el nuevo user.
+  */
   const { user_name, password, email }: IRegister = req.body;
   try {
     if (!user_name || !password || !email) {
@@ -21,6 +28,23 @@ export const register = async (req: Request, res: Response) => {
         .status(404)
         .send('¡user_name, email and password are required!');
     }
+    const usernameRegex = /^(?!.*\s.*\s)[a-zA-Z ]{6,15}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,15}$/;
+    const emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+    if (!usernameRegex.test(user_name))
+      return res
+        .status(404)
+        .send(
+          'Incorrect user_name!  It must have at least 6 characters and a maximum of 15, they can only be letters of the alphabet.'
+        );
+
+    if (!passwordRegex.test(password))
+      return res
+        .status(404)
+        .send(
+          'Incorrect password!: It must have at least one capital letter, one number, at least 6 characters and a maximum of 15'
+        );
+    if (!emailRegex.test(email)) return res.status(404).send('Incorrect email');
     const searchUserName: Model | null = await User.findOne({
       where: { user_name },
     });
@@ -42,13 +66,11 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
+  /*Aquí lo que hice fue comprobar si esta autenticado pasandole a la funcion de isAutenticated el username y el password, 
+  si esta autenticado entonces traigo al usuario de la db e incluyo el modelo List y también sus tareas, al final lo que mando al cliente son
+  practicamente todos sus datos personales con todas sus listas y tareas.*/
   const { userName, password } = req.params;
-  console.log(userName, password);
-
   try {
-    if (!userName || !password) {
-      return res.status(404).send('¡userName and password are required!');
-    }
     const isAutenticated = await authenticated(userName, password);
     if (isAutenticated) {
       const user: Model | null = await User.findOne({
@@ -59,7 +81,7 @@ export const login = async (req: Request, res: Response) => {
             include: [
               {
                 model: Task,
-                // Excluimos el campo ListId de las tareas porque rompe mucho los huevos y no lo voy a usar
+                // Excluimos el campo ListId de las tareas porque no lo voy a usar
                 attributes: { exclude: ['ListId'] },
               },
             ],

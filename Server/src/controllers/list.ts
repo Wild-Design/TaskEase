@@ -8,13 +8,15 @@ export const getList = async (_: Request, res: Response) => {
 };
 
 export const createList = async (req: Request, res: Response) => {
+  /*Aquí como en casi todos los endpoints me aseguro que todos los datos desestructurados se pasen si o si, y me fijo si esta autenticado.
+    Entonces si esta autenticado creo una nueva lista y muy importante a esa lista le pongo el nombre pasado por params y el UserId pasa asociar 
+    la lista a su usuario perteneciente.*/
   const { listName } = req.params;
   const { UserId, user_name, password } = req.body;
   if (!UserId || !user_name || !password)
     return res.status(400).send('UserId, user_name and password are required');
   try {
     const isAutenticated = await authenticated(user_name, password);
-
     if (isAutenticated) {
       const newList = await List.create({ name: listName, UserId: UserId });
       res.status(200).send(newList);
@@ -29,6 +31,12 @@ export const createList = async (req: Request, res: Response) => {
 };
 
 export const deleteList = async (req: Request, res: Response) => {
+  /*Bueno aca hice algunas cosas diferentes con respecto a otros endpoints, quise aplicar una lógica mas segura y asegurarme no solo que el usuario este autenticado 
+    si no que  también me aseguro que la lista que se va a borrar sea solo de ese usuario y de nadie más.
+    Como siempre primero me aseguro  que todos los datos desestructurados se pasen si o si, luego me aseguro que este autenticado y aquí es donde devo explicar con mas detalle
+    la función de (autenticated).Esta función devuelve el ID del usuario si esta autenticado. Entonces lo que hago primero traer la lista para comprobar si existe
+    entonces si la lista existe lo que hago es comparar el UserId de la lista con el id de la funcion (autenticated), es justo aqui donde yo me aseguro que solo sea el
+    usuario dueño de esa lista el que puede borrar. Si todo esta bien se borra la lista y todas las tareas pertenecientes a esa lista.*/
   const { listId } = req.params;
   const { user_name, password } = req.body;
   try {
@@ -59,6 +67,9 @@ export const deleteList = async (req: Request, res: Response) => {
 };
 
 export const updateListName = async (req: Request, res: Response) => {
+  /* Me aseguro que se pasen si o si todos los datos desestructurados, también me aseguro si esta autenticado y si todo esta bien entonces
+  busco la lista para comprobar si existe y si existe entonces actualizo la propiedad name de la lista con el valor de description.
+   */
   const { listId } = req.params;
   const { user_name, password, description } = req.body;
   try {
@@ -68,7 +79,6 @@ export const updateListName = async (req: Request, res: Response) => {
         .send('user_name, password, ListId and description are required');
     }
     const isAutenticated = await authenticated(user_name, password);
-
     if (isAutenticated) {
       const searchList: any = await List.findByPk(listId);
       if (searchList) {

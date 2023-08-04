@@ -5,6 +5,9 @@ export const getList = async (_, res) => {
     res.status(200).send(getAllLists);
 };
 export const createList = async (req, res) => {
+    /*Aquí como en casi todos los endpoints me aseguro que todos los datos desestructurados se pasen si o si, y me fijo si esta autenticado.
+      Entonces si esta autenticado creo una nueva lista y muy importante a esa lista le pongo el nombre pasado por params y el UserId pasa asociar
+      la lista a su usuario perteneciente.*/
     const { listName } = req.params;
     const { UserId, user_name, password } = req.body;
     if (!UserId || !user_name || !password)
@@ -26,6 +29,12 @@ export const createList = async (req, res) => {
     }
 };
 export const deleteList = async (req, res) => {
+    /*Bueno aca hice algunas cosas diferentes con respecto a otros endpoints, quise aplicar una lógica mas segura y asegurarme no solo que el usuario este autenticado
+      si no que  también me aseguro que la lista que se va a borrar sea solo de ese usuario y de nadie más.
+      Como siempre primero me aseguro  que todos los datos desestructurados se pasen si o si, luego me aseguro que este autenticado y aquí es donde devo explicar con mas detalle
+      la función de (autenticated).Esta función devuelve el ID del usuario si esta autenticado. Entonces lo que hago primero traer la lista para comprobar si existe
+      entonces si la lista existe lo que hago es comparar el UserId de la lista con el id de la funcion (autenticated), es justo aqui donde yo me aseguro que solo sea el
+      usuario dueño de esa lista el que puede borrar. Si todo esta bien se borra la lista y todas las tareas pertenecientes a esa lista.*/
     const { listId } = req.params;
     const { user_name, password } = req.body;
     try {
@@ -56,6 +65,9 @@ export const deleteList = async (req, res) => {
     }
 };
 export const updateListName = async (req, res) => {
+    /* Me aseguro que se pasen si o si todos los datos desestructurados, también me aseguro si esta autenticado y si todo esta bien entonces
+    busco la lista para comprobar si existe y si existe entonces actualizo la propiedad name de la lista con el valor de description.
+     */
     const { listId } = req.params;
     const { user_name, password, description } = req.body;
     try {

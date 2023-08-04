@@ -5,5 +5,5 @@ router.get('/', getTask);
 router.post('/', createTask);
 router.put('/:taskId', updateTaskName);
 router.delete('/:taskId', deleteTask);
-router.put('/', transferTask);
+router.put('/:taskId/:destinationListId', transferTask);
 export default router;
