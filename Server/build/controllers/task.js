@@ -31,12 +31,8 @@ export const createTask = async (req, res) => {
 export const deleteTask = async (req, res) => {
     /*Sensillo, recivo por params el id de la tarea que quiero borrar, me aseguro que el usuario este autenticado y si todo esta bien,
       Reviso primero que la tarea exista entonces busco la tarea y si existe entonces la borro */
-    const { taskId } = req.params;
-    const { user_name, password } = req.body;
+    const { taskId, user_name, password } = req.params;
     try {
-        if (!user_name || !password) {
-            return res.status(400).send('user_name and password are required');
-        }
         const isAutenticated = await authenticated(user_name, password);
         if (isAutenticated) {
             const getTask = await Task.findByPk(taskId);

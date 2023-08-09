@@ -4,6 +4,6 @@ const router = Router();
 router.get('/', getTask);
 router.post('/', createTask);
 router.put('/:taskId', updateTaskName);
-router.delete('/:taskId', deleteTask);
+router.delete('/:taskId/:user_name/:password', deleteTask);
 router.put('/:taskId/:destinationListId', transferTask);
 export default router;
