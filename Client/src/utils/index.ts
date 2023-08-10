@@ -35,3 +35,55 @@ export const deleteTask = async (
     console.log(error.message);
   }
 };
+
+export const deleteList = async (
+  listId: string,
+  user_name: string,
+  password: string
+) => {
+  try {
+    await axios.delete<AxiosResponse>(
+      `http://localhost:3001/list/${listId}/${user_name}/${password}`
+    );
+    return 'List deleted successfully';
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
+
+export const createList = async (
+  listName: string,
+  UserId: string,
+  user_name: string,
+  password: string
+) => {
+  try {
+    await axios.post(`http://localhost:3001/list/${listName}`, {
+      UserId,
+      user_name,
+      password,
+    });
+    return 'List created successfully';
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
+
+export const createTask = async (
+  ListId: string,
+  user_name: string,
+  password: string,
+  description: string
+) => {
+  try {
+    await axios.post('http://localhost:3001/task', {
+      ListId,
+      user_name,
+      password,
+      description,
+    });
+    return 'Task created successfully';
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};

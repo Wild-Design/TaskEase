@@ -10,7 +10,7 @@ const router = Router();
 
 router.get('/', getList);
 router.put('/:listId', updateListName);
-router.delete('/:listId', deleteList);
+router.delete('/:listId/:user_name/:password', deleteList);
 router.post('/:listName', createList);
 
 export default router;

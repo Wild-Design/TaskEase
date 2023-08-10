@@ -35,12 +35,8 @@ export const deleteList = async (req, res) => {
       la función de (autenticated).Esta función devuelve el ID del usuario si esta autenticado. Entonces lo que hago primero traer la lista para comprobar si existe
       entonces si la lista existe lo que hago es comparar el UserId de la lista con el id de la funcion (autenticated), es justo aqui donde yo me aseguro que solo sea el
       usuario dueño de esa lista el que puede borrar. Si todo esta bien se borra la lista y todas las tareas pertenecientes a esa lista.*/
-    const { listId } = req.params;
-    const { user_name, password } = req.body;
+    const { listId, user_name, password } = req.params;
     try {
-        if (!user_name || !password) {
-            return res.status(400).send('user_name and password are required');
-        }
         const isAutenticated = await authenticated(user_name, password);
         if (isAutenticated) {
             const getList = await List.findByPk(listId);

@@ -2,18 +2,19 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Home from './pages/Home/Home';
-import { deleteTask } from './utils';
+import { createTask } from './utils';
 
 function App() {
   const handleCoso = async () => {
-    const coso = await deleteTask(
-      '95d6669b-3dff-4915-9c3f-45ac789ef28b',
+    const coso = await createTask(
+      'EL DROGADICTO WILD',
+      'e18d2fa7-b98c-4a80-9efb-bc3f8efc1caa',
       'Joaquin',
       'brenneke1'
     );
     coso
-      ? alert(`Se borro correctamente la tarea \n ${coso}`)
-      : alert('No se borro un choto');
+      ? alert(`Lista creada correctamente \n ${coso}`)
+      : alert('No se creo un choto');
   };
   return (
     <>
