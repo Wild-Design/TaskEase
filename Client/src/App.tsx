@@ -2,24 +2,22 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Home from './pages/Home/Home';
-import { createTask } from './utils';
+import { transferTask } from './utils';
 
 function App() {
-  const handleCoso = async () => {
-    const coso = await createTask(
-      'EL DROGADICTO WILD',
-      'e18d2fa7-b98c-4a80-9efb-bc3f8efc1caa',
+  const updated = async () => {
+    const UPDATED = await transferTask(
+      '5a86caf2-e966-4ac4-a3d0-d8704af7cda4',
+      'aa4cbf49-0ab4-49f2-8681-80f4d024690f',
       'Joaquin',
-      'brenneke1'
+      'sumsum'
     );
-    coso
-      ? alert(`Lista creada correctamente \n ${coso}`)
-      : alert('No se creo un choto');
+    UPDATED ? alert('Tarea movida correctamente') : alert('No');
   };
   return (
     <>
-      <h1 style={{ cursor: 'pointer' }} onClick={handleCoso}>
-        Consume
+      <h1 onClick={updated} style={{ cursor: 'pointer' }}>
+        Probar
       </h1>
       <Link to='/login'>
         <button>Login</button>

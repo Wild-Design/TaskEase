@@ -87,3 +87,56 @@ export const createTask = async (
     console.log(error.message);
   }
 };
+
+export const updateTask = async (
+  taskId: string,
+  user_name: string,
+  password: string,
+  description: string
+) => {
+  try {
+    await axios.put(`http://localhost:3001/task/${taskId}`, {
+      user_name,
+      password,
+      description,
+    });
+    return 'Task updated successfully';
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
+
+export const updateList = async (
+  listId: string,
+  user_name: string,
+  password: string,
+  description: string
+) => {
+  try {
+    await axios.put(`http://localhost:3001/list/${listId}`, {
+      user_name,
+      password,
+      description,
+    });
+    return 'List updated successfully';
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
+
+export const transferTask = async (
+  taskId: string,
+  destinationListId: string,
+  user_name: string,
+  password: string
+) => {
+  try {
+    await axios.put(
+      `http://localhost:3001/task/${taskId}/${destinationListId}`,
+      { user_name, password }
+    );
+    return 'Task transferred successfully';
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
