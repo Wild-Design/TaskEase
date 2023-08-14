@@ -6,17 +6,17 @@ export interface IFullDataUser {
   first_name: null;
   last_name: null;
   age: null;
-  Lists: List[];
+  Lists: IList[];
 }
 
-export interface List {
+export interface IList {
   id: string;
   name: string;
   UserId: string;
-  Tasks: Task[];
+  Tasks: ITask[];
 }
 
-export interface Task {
+export interface ITask {
   id: string;
   description: string;
 }

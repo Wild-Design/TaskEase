@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import { getFullDataUser } from '../../features/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Login: FC = () => {
   const navigate = useNavigate();
@@ -24,6 +25,13 @@ const Login: FC = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Inicio de Sesión</title>
+        <meta
+          name='description'
+          content='Inicia sesión para acceder a TaskEase'
+        />
+      </Helmet>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <input

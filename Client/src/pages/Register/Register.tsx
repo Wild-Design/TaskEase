@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { userRegister } from '../../utils';
+import { Helmet } from 'react-helmet';
 
 const Register: FC = () => {
   const navigate = useNavigate();
@@ -22,6 +23,10 @@ const Register: FC = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Crea tu cuenta en TaskEase</title>
+        <meta name='description' content='Registrate en TaskEae' />
+      </Helmet>
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <input

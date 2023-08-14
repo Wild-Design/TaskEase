@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import type { RootState } from '../app/store';
 import axios, { AxiosResponse } from 'axios';
 import { IFullDataUser } from '../interfaces/index';
 
-const initialState = {
+interface IState {
+  fullData: IFullDataUser | {};
+}
+
+const initialState: IState = {
   fullData: {},
 };
 
