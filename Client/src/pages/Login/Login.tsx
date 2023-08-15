@@ -29,7 +29,7 @@ const Login: FC = () => {
         <title>Inicio de Sesión</title>
         <meta
           name='description'
-          content='Inicia sesión para acceder a TaskEase'
+          content='Inicia sesión para acceder a tus datos de TaskEase'
         />
       </Helmet>
       <h2>Login</h2>

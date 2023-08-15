@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
+import Board from '../../components/Board/Board';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Home = () => {
       <button onClick={() => navigate('/register')}>Register</button>
       <div>
         <h2>Home</h2>
+        <Board />
       </div>
     </>
   );

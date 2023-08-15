@@ -3,11 +3,11 @@ import axios, { AxiosResponse } from 'axios';
 import { IFullDataUser } from '../interfaces/index';
 
 interface IState {
-  fullData: IFullDataUser | {};
+  fullData: IFullDataUser | null;
 }
 
 const initialState: IState = {
-  fullData: {},
+  fullData: null,
 };
 
 const userSlice = createSlice({

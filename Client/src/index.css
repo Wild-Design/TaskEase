@@ -7,14 +7,21 @@
 body {
   display: flex;
   font-family: 'Roboto', sans-serif;
-  background-color: #c86527;
-  color: #000000;
+  color: #44546f;
+  background-color: rgb(55, 72, 102);
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  user-select: none;
 }
 
 .padre {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
+  margin-left: 200px;
+  margin-top: 250px;
+  margin-bottom: 100px;
+  background-color: #fe46a5;
   width: 250px;
 }
 
@@ -23,6 +30,6 @@ body {
   height: 50px;
   text-align: center;
   padding-top: 15px;
-  border: 1px solid #000000;
-  color: #000000;
+  border: 1px solid #ffffff;
+  color: #ffffff;
 }
