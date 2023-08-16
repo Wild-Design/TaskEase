@@ -3,11 +3,10 @@ import db from './db/db.js';
 import { config } from 'dotenv';
 config();
 
-const { PORT } = process.env;
+const PORT = process.env.PORT || 3001;
 
-(async () => {
-  await db.sync();
+db.sync().then(() =>
   server.listen(PORT, () => {
     console.log(`Server listen on port ${PORT}`);
-  });
-})();
+  })
+);
