@@ -10,7 +10,7 @@ export default (sequelize: Sequelize) => {
         defaultValue: UUIDV4,
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(700),
         allowNull: false,
       },
     },

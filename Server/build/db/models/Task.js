@@ -7,7 +7,7 @@ export default (sequelize) => {
             defaultValue: UUIDV4,
         },
         description: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(700),
             allowNull: false,
         },
     }, { timestamps: false });

@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Home</title>
+        <title>TaskEase</title>
         <meta
           name='description'
           content='Crea tus tareas, organisa tu día a día'

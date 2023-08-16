@@ -20,5 +20,6 @@
 .liContent {
   font-weight: 400;
   font-size: 15px;
+  line-height: 1.3;
   word-wrap: break-word; /* Rompe las palabras largas para ajustar dentro del contenedor */
 }
