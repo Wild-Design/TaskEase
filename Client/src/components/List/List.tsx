@@ -28,7 +28,7 @@ const List: FC<Props> = ({ list }) => {
           <IoMdAdd />
           <span className={styles.addParagraph}>Añadir tarea</span>
         </div>
-        <ClearListButton />
+        <ClearListButton list={list} />
       </div>
     </div>
   );

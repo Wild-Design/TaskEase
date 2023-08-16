@@ -26,6 +26,7 @@ export const getFullDataUser = (username: string, password: string) => {
       const fullData: AxiosResponse<IFullDataUser> = await axios.get(
         `http://localhost:3001/user/login/${username}/${password}`
       );
+      fullData.data.password = password;
       dispatch(getFullData(fullData.data));
       return true;
     } catch (error: any) {
