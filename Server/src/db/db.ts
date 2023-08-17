@@ -11,7 +11,16 @@ const { DB_DEPLOY } = process.env;
 const sequelize: Sequelize = new Sequelize(
   // `postgres://${USER}:${PASSWORD}@${HOST}:${DB_PORT}/${DB_NAME}`,
   DB_DEPLOY!,
-  { logging: false }
+  {
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
+    logging: false,
+  }
 );
 
 modelUser(sequelize);
