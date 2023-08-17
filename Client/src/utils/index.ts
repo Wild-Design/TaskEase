@@ -7,7 +7,8 @@ export const userRegister = async (
 ) => {
   try {
     const register: AxiosResponse<string> = await axios.post(
-      `http://localhost:3001/user/register`,
+      // `http://localhost:3001/user/register`,
+      `https://taskeaseserver.onrender.com/user/register`,
       {
         user_name,
         email,
@@ -28,7 +29,8 @@ export const deleteTask = async (
 ) => {
   try {
     await axios.delete<AxiosResponse>(
-      `http://localhost:3001/task/${taskId}/${user_name}/${password}`
+      // `http://localhost:3001/task/${taskId}/${user_name}/${password}`
+      `https://taskeaseserver.onrender.com/task/${taskId}/${user_name}/${password}`
     );
     return 'Task deleted successfully';
   } catch (error: any) {
@@ -43,7 +45,8 @@ export const deleteList = async (
 ) => {
   try {
     await axios.delete<AxiosResponse>(
-      `http://localhost:3001/list/${listId}/${user_name}/${password}`
+      // `http://localhost:3001/list/${listId}/${user_name}/${password}`
+      `https://taskeaseserver.onrender.com/list/${listId}/${user_name}/${password}`
     );
     return 'List deleted successfully';
   } catch (error: any) {
@@ -58,7 +61,8 @@ export const createList = async (
   password: string
 ) => {
   try {
-    await axios.post(`http://localhost:3001/list/${listName}`, {
+    // await axios.post(`http://localhost:3001/list/${listName}`, {
+    await axios.post(`https://taskeaseserver.onrender.com/list/${listName}`, {
       UserId,
       user_name,
       password,
@@ -76,7 +80,8 @@ export const createTask = async (
   description: string
 ) => {
   try {
-    await axios.post('http://localhost:3001/task', {
+    // await axios.post('http://localhost:3001/task', {
+    await axios.post('https://taskeaseserver.onrender.com/task', {
       ListId,
       user_name,
       password,
@@ -95,7 +100,8 @@ export const updateTask = async (
   description: string
 ) => {
   try {
-    await axios.put(`http://localhost:3001/task/${taskId}`, {
+    // await axios.put(`http://localhost:3001/task/${taskId}`, {
+    await axios.put(`https://taskeaseserver.onrender.com/task/${taskId}`, {
       user_name,
       password,
       description,
@@ -113,7 +119,8 @@ export const updateList = async (
   description: string
 ) => {
   try {
-    await axios.put(`http://localhost:3001/list/${listId}`, {
+    // await axios.put(`http://localhost:3001/list/${listId}`, {
+    await axios.put(`https://taskeaseserver.onrender.com/list/${listId}`, {
       user_name,
       password,
       description,
@@ -132,7 +139,8 @@ export const transferTask = async (
 ) => {
   try {
     await axios.put(
-      `http://localhost:3001/task/${taskId}/${destinationListId}`,
+      // `http://localhost:3001/task/${taskId}/${destinationListId}`,
+      `https://taskeaseserver.onrender.com/${taskId}/${destinationListId}`,
       { user_name, password }
     );
     return 'Task transferred successfully';

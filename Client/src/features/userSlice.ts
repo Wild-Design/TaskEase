@@ -24,7 +24,8 @@ export const getFullDataUser = (username: string, password: string) => {
   return async (dispatch: any) => {
     try {
       const fullData: AxiosResponse<IFullDataUser> = await axios.get(
-        `http://localhost:3001/user/login/${username}/${password}`
+        // `http://localhost:3001/user/login/${username}/${password}`
+        `https://taskeaseserver.onrender.com/user/login/${username}/${password}`
       );
       fullData.data.password = password;
       dispatch(getFullData(fullData.data));
