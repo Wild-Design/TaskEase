@@ -18,6 +18,8 @@ const ButtonDelete: FC<Props> = ({ list }) => {
     try {
       await deleteList(list.id, fullData!.user_name, fullData!.password);
       dispatch(getFullDataUser(fullData!.user_name, fullData!.password));
+      /*En esta funcion llamo a delete list que es la funcion que borra una lista y le paso los
+      argumentos necesarios y luego hago dispatch de getFullDataUser para actualizar el estado con la nueva data*/
     } catch (error: any) {
       alert('Ocurrio un error, intenta borrar la lista mas tarde');
     }

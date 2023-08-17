@@ -11,7 +11,10 @@
   -o-border-radius: 15px;
   padding: 10px;
 }
-
+/* .scroll{
+  max-height: 800px;
+  overflow: scroll;
+} */
 .title {
   font-size: 17px;
   padding: 5px 10px 10px 10px;

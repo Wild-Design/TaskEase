@@ -14,7 +14,6 @@ const Home = () => {
         />
       </Helmet>
       <button onClick={() => navigate('/login')}>Login</button>
-      <button onClick={() => navigate('/register')}>Register</button>
       <div>
         <h2>Home</h2>
         <Board />

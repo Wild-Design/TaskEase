@@ -12,6 +12,7 @@ interface Props {
 const List: FC<Props> = ({ list }) => {
   return (
     <div className={styles.list}>
+      {/* <div className={styles.scroll}> */}
       <div className={styles.headerContainer}>
         <h3 className={styles.title}>{list.name}</h3>
         <div className={styles.pencilContainer}>
@@ -30,6 +31,7 @@ const List: FC<Props> = ({ list }) => {
         </div>
         <ClearListButton list={list} />
       </div>
+      {/* </div> */}
     </div>
   );
 };
