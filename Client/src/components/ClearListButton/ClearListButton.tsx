@@ -36,7 +36,7 @@ const ButtonDelete: FC<Props> = ({ list }) => {
         );
         Swal.fire(
           'Borrada',
-          'La lista fue borrada de forma exitosa',
+          `La lista "${list.name}" fue borrada de forma exitosa`,
           'success'
         );
       }
