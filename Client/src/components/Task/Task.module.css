@@ -18,6 +18,10 @@
   background-color: var(--list-color);
 }
 
+.taskHover {
+  background-color: var(--list-color);
+}
+
 .liContent {
   font-weight: 400;
   font-size: 15px;
@@ -27,6 +31,6 @@
 
 .iconsContainer {
   position: absolute;
-  top: 10px;
+  top: 5px;
   right: 10px;
 }

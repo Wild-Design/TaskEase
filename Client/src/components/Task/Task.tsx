@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { ITask } from '../../interfaces';
 import styles from './Task.module.css';
 import { RiDeleteBinLine } from 'react-icons/ri';
@@ -9,12 +9,32 @@ interface Props {
 }
 
 export const Task: FC<Props> = ({ task }) => {
+  const [taskHover, setTaskHover] = useState(false);
+
+  const handleHover = () => {
+    setTaskHover(true);
+  };
+  const handleLeave = () => {
+    setTaskHover(false);
+  };
   return (
-    <li className={styles.liContainer}>
+    <li
+      onMouseEnter={handleHover}
+      onMouseLeave={handleLeave}
+      className={styles.liContainer}
+    >
       <p className={styles.liContent}>{task.description}</p>
-      <div className={styles.iconsContainer}>
-        <RiDeleteBinLine />
-      </div>
+      {taskHover ? (
+        <div
+          className={`${styles.iconsContainer} ${
+            taskHover && styles.taskHover
+          }`}
+        >
+          <RiDeleteBinLine />
+        </div>
+      ) : (
+        ''
+      )}
     </li>
   );
 };
