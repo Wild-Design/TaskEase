@@ -33,6 +33,10 @@
   right: 10px;
 }
 
+.iconsOff {
+  display: none;
+}
+
 .iconsDiv {
   border-radius: 5px;
   padding: 5px 7px 5px 7px;
@@ -46,11 +50,15 @@
   background-color: #c7c7c7;
 }
 
-.coso {
-  display: none !important;
-}
-
 .iconsDiv svg {
   position: relative;
   top: 2px;
+}
+
+.spinnerContainer {
+  position: absolute;
+  display: flex;
+  column-gap: 5px;
+  top: 5px;
+  right: 10px;
 }

@@ -35,7 +35,7 @@ export const Task: FC<Props> = ({ task }) => {
       );
     } catch (error: any) {
       setChangeDeleteButton(false);
-      alert('Error al borrar, intenta mas tarde quesyo');
+      alert('Error al borrar, intenta mas tarde queseyo');
     }
   };
   return (
@@ -46,25 +46,30 @@ export const Task: FC<Props> = ({ task }) => {
     >
       <p className={styles.liContent}>{task.description}</p>
       {taskHover && (
-        <div className={styles.iconsContainer}>
+        <div
+          className={`${styles.iconsContainer}  ${
+            changeDeleteButton && styles.iconsOff
+          }`}
+        >
           <div className={styles.iconsDiv}>
             <RiPencilLine />
           </div>
           <div onClick={handleDelete} className={styles.iconsDiv}>
-            {!changeDeleteButton ? (
-              <RiDeleteBinLine />
-            ) : (
-              <ThreeDots
-                height='20'
-                width='20'
-                radius='9'
-                color='#4fa94d'
-                ariaLabel='three-dots-loading'
-                wrapperStyle={{}}
-                visible={true}
-              />
-            )}
+            <RiDeleteBinLine />
           </div>
+        </div>
+      )}
+      {changeDeleteButton && (
+        <div className={styles.spinnerContainer}>
+          <ThreeDots
+            height='30'
+            width='30'
+            radius='9'
+            color='#4fa94d'
+            ariaLabel='three-dots-loading'
+            wrapperStyle={{}}
+            visible={true}
+          />
         </div>
       )}
     </li>
