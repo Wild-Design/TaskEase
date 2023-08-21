@@ -2,6 +2,10 @@ import { FC, useState } from 'react';
 import { ITask } from '../../interfaces';
 import styles from './Task.module.css';
 import { RiDeleteBinLine, RiPencilLine } from 'react-icons/ri';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { getFullDataUser } from '../../features/userSlice';
+import { deleteTask } from '../../utils';
+import { ThreeDots } from 'react-loader-spinner';
 
 interface Props {
   task: ITask;
@@ -9,36 +13,59 @@ interface Props {
 }
 
 export const Task: FC<Props> = ({ task }) => {
-  const [taskHover, setTaskHover] = useState(true);
+  const dispatch = useAppDispatch();
+  const { fullData } = useAppSelector((state) => state.userSlice);
 
-  const handleTaskHover = () => {
+  const [taskHover, setTaskHover] = useState(false);
+
+  const handleHoverTask = (): void => {
     setTaskHover(true);
   };
-  const handleTaskLeave = () => {
+  const handleLeaveTask = (): void => {
     setTaskHover(false);
+  };
+
+  const [changeDeleteButton, setChangeDeleteButton] = useState(false);
+  const handleDelete = async () => {
+    try {
+      setChangeDeleteButton(true);
+      await deleteTask(task.id, fullData?.user_name!, fullData?.password!);
+      await dispatch(
+        getFullDataUser(fullData?.user_name!, fullData?.password!)
+      );
+    } catch (error: any) {
+      setChangeDeleteButton(false);
+      alert('Error al borrar, intenta mas tarde quesyo');
+    }
   };
   return (
     <li
-      onMouseEnter={handleTaskHover}
-      onMouseLeave={handleTaskLeave}
+      onMouseEnter={handleHoverTask}
+      onMouseLeave={handleLeaveTask}
       className={styles.liContainer}
     >
       <p className={styles.liContent}>{task.description}</p>
-      {taskHover ? (
-        <div className={`${styles.iconsContainer}`}>
-          <div
-            className={`${styles.icons} ${taskHover} && ${styles.taskHover}`}
-          >
+      {taskHover && (
+        <div className={styles.iconsContainer}>
+          <div className={styles.iconsDiv}>
             <RiPencilLine />
           </div>
-          <div
-            className={`${styles.icons} ${taskHover} && ${styles.taskHover}`}
-          >
-            <RiDeleteBinLine />
+          <div onClick={handleDelete} className={styles.iconsDiv}>
+            {!changeDeleteButton ? (
+              <RiDeleteBinLine />
+            ) : (
+              <ThreeDots
+                height='20'
+                width='20'
+                radius='9'
+                color='#4fa94d'
+                ariaLabel='three-dots-loading'
+                wrapperStyle={{}}
+                visible={true}
+              />
+            )}
           </div>
         </div>
-      ) : (
-        ''
       )}
     </li>
   );
