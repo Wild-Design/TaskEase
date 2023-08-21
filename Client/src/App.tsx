@@ -3,6 +3,7 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Home from './pages/Home/Home';
 import TableroDelCasino from './components/TableroDelCasino/TableroDelCasino';
+import { Helmet } from 'react-helmet';
 
 function App() {
   const navigate = useNavigate();
@@ -13,6 +14,10 @@ function App() {
           path='/'
           element={
             <>
+              <Helmet>
+                <title>TaskEase</title>
+                <meta name='description' content='Pagina inicial de TaskEase' />
+              </Helmet>
               <h1>Hola Mundo!</h1>
               <button onClick={() => navigate('/home')}>Home</button>
             </>
