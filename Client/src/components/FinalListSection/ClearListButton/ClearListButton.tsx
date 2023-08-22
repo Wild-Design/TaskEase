@@ -1,10 +1,10 @@
 import { FC, useState } from 'react';
 import styles from './ClearListButton.module.css';
 import { RiDeleteBinLine } from 'react-icons/ri';
-import { IList } from '../../interfaces';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { getFullDataUser } from '../../features/userSlice';
-import { deleteList } from '../../utils';
+import { IList } from '../../../interfaces';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { getFullDataUser } from '../../../features/userSlice';
+import { deleteList } from '../../../utils';
 import Swal from 'sweetalert2';
 import { ThreeDots } from 'react-loader-spinner';
 

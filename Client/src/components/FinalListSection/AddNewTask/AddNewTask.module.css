@@ -1,0 +1,22 @@
+.addTaskContainer {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -o-border-radius: 7px;
+  margin-top: 8px;
+  width: 100%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.addTaskContainer svg {
+  font-size: 20px;
+}
+
+.addTaskContainer:hover {
+  background-color: #091e4224;
+}

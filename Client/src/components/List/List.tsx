@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { IList } from '../../interfaces';
 import { Task } from '../Task/Task';
 import styles from './List.module.css';
-import { IoMdAdd } from 'react-icons/io';
 import { BsPencil } from 'react-icons/bs';
-import ClearListButton from '../ClearListButton/ClearListButton';
+
+import FinalListSection from '../FinalListSection/FinalListSection';
 
 interface Props {
   list: IList;
@@ -23,13 +23,7 @@ const List: FC<Props> = ({ list }) => {
           <Task key={task.id} listId={list.id} task={task} />
         ))}
       </ul>
-      <div className={styles.finalSection}>
-        <div className={styles.addTaskContainer}>
-          <IoMdAdd />
-          <span className={styles.addParagraph}>Añadir tarea</span>
-        </div>
-        <ClearListButton list={list} />
-      </div>
+      <FinalListSection list={list} />
     </div>
   );
 };
