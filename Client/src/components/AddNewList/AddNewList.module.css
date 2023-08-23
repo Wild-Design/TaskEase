@@ -85,3 +85,9 @@
   cursor: pointer;
   font-size: 22px;
 }
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
