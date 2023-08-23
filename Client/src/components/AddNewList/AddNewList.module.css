@@ -29,3 +29,59 @@
   margin-top: 5px;
   font-size: 24px;
 }
+
+.addListHidden {
+  display: none;
+}
+
+.formContainer {
+  width: 280px;
+  height: max-content;
+  background-color: var(--list-color);
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  padding: 10px;
+}
+
+.input {
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border: none;
+  outline: 2px solid #0c66e4;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.buttonAddList {
+  cursor: pointer;
+  font-size: 15px;
+  padding: 9px 13px;
+  background-color: #0c66e4;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border: none;
+  color: #fff;
+  margin-right: 17px;
+}
+.buttonAddList:hover {
+  background-color: #083f8d;
+}
+.buttonCancel svg {
+  cursor: pointer;
+  font-size: 22px;
+}

@@ -14,18 +14,13 @@ interface Props {
 
 export const Task: FC<Props> = ({ task }) => {
   const dispatch = useAppDispatch();
+
   const { fullData } = useAppSelector((state) => state.userSlice);
 
   const [taskHover, setTaskHover] = useState(false);
 
-  const handleHoverTask = (): void => {
-    setTaskHover(true);
-  };
-  const handleLeaveTask = (): void => {
-    setTaskHover(false);
-  };
-
   const [changeDeleteButton, setChangeDeleteButton] = useState(false);
+
   const handleDelete = async () => {
     try {
       setChangeDeleteButton(true);
@@ -40,8 +35,8 @@ export const Task: FC<Props> = ({ task }) => {
   };
   return (
     <li
-      onMouseEnter={handleHoverTask}
-      onMouseLeave={handleLeaveTask}
+      onMouseEnter={() => setTaskHover(true)}
+      onMouseLeave={() => setTaskHover(false)}
       className={styles.liContainer}
     >
       <p className={styles.liContent}>{task.description}</p>
