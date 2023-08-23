@@ -18,6 +18,7 @@ const AddNewList = () => {
       {addInput && (
         <div className={styles.formContainer}>
           <input
+            autoFocus
             className={styles.input}
             type='text'
             placeholder='Introduzca el título de la lista...'
