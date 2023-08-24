@@ -13,8 +13,14 @@
 }
 
 .title {
+  cursor: text;
   font-size: 17px;
   padding: 5px 10px 10px 10px;
+}
+
+.input {
+  font-size: 17px;
+  padding: 5px;
 }
 
 .ul {

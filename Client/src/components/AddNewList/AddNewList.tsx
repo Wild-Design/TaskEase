@@ -1,7 +1,7 @@
 import styles from './AddNewList.module.css';
 import { IoMdAdd } from 'react-icons/io';
 import { RxCross1 } from 'react-icons/rx';
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getFullDataUser } from '../../features/userSlice';
 import { createList } from '../../utils/';
@@ -18,7 +18,8 @@ const AddNewList: FC = () => {
     const { value } = event.target;
     setInputValue(value);
   };
-  const addList = async (): Promise<void> => {
+
+  const handleAddList = async (): Promise<void> => {
     try {
       if (inputValue.trim().length > 0 && inputValue.length > 0) {
         //compruevo que el input tenga al menos un caracter
@@ -41,6 +42,10 @@ const AddNewList: FC = () => {
       alert('Algo salió mal, intenta guardar la lista mas tarde');
     }
   };
+  const handleSubmit = (event: FormEvent<any>) => {
+    event.preventDefault();
+    handleAddList();
+  };
 
   return (
     <>
@@ -53,16 +58,20 @@ const AddNewList: FC = () => {
       </div>
       {addInput && (
         <div className={styles.formContainer}>
-          <input
-            onChange={handleInputChange}
-            autoFocus
-            className={styles.input}
-            type='text'
-            placeholder='Introduzca el título de la lista...'
-          />
+          <form onSubmit={handleSubmit}>
+            <input
+              onChange={handleInputChange}
+              autoFocus
+              className={styles.input}
+              type='text'
+              placeholder='Introduzca el título de la lista...'
+              disabled={charging}
+            />
+          </form>
+
           {!charging ? (
             <div className={styles.buttons}>
-              <button onClick={addList} className={styles.buttonAddList}>
+              <button onClick={handleAddList} className={styles.buttonAddList}>
                 Añadir lista
               </button>
               <div
@@ -74,6 +83,7 @@ const AddNewList: FC = () => {
             </div>
           ) : (
             <div className={styles.spinner}>
+              <p>Añadiendo lista...</p>
               <ThreeDots
                 height='30'
                 width='40'

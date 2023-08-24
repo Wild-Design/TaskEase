@@ -12,6 +12,7 @@
   -o-border-radius: 50px;
   padding: 10px;
   background-color: var(--task-color);
+  color: var(--font-color);
   box-shadow: 0 1px 1px #091e4240, 0 0 1px #091e424f;
 }
 .liContainer:hover {
@@ -44,15 +45,18 @@
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+  background-color: transparent;
+  backdrop-filter: blur(0.6px);
 }
 
 .iconsDiv:hover {
-  background-color: #c7c7c7;
+  background-color: #cbcbcb;
 }
 
 .iconsDiv svg {
   position: relative;
   top: 2px;
+  color: var(--font-color);
 }
 
 .spinnerContainer {

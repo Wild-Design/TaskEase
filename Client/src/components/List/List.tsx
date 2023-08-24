@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import { IList } from '../../interfaces';
 import { Task } from '../Task/Task';
 import styles from './List.module.css';
@@ -10,11 +10,34 @@ interface Props {
   list: IList;
 }
 const List: FC<Props> = ({ list }) => {
+  const [addInputEdit, setAddInputEdit] = useState(false);
+  const [inputValue, setInputValue] = useState(list.name);
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setInputValue(inputValue + value);
+  };
+
   return (
     <div className={styles.list}>
       <div className={styles.headerContainer}>
-        <h3 className={styles.title}>{list.name}</h3>
-        <div className={styles.pencilContainer}>
+        {!addInputEdit ? (
+          <h3 className={styles.title}>{list.name}</h3>
+        ) : (
+          <form>
+            <input
+              onChange={handleInputChange}
+              className={styles.input}
+              type='text'
+              autoFocus
+              value={inputValue}
+            />
+          </form>
+        )}
+
+        <div
+          onClick={() => setAddInputEdit(true)}
+          className={styles.pencilContainer}
+        >
           <BsPencil />
         </div>
       </div>

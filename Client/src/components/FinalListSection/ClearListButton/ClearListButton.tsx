@@ -34,11 +34,12 @@ const ButtonDelete: FC<Props> = ({ list }) => {
         await dispatch(
           getFullDataUser(fullData!.user_name, fullData!.password)
         );
-        Swal.fire(
-          'Borrada',
-          `La lista "${list.name}" fue borrada correctamente`,
-          'success'
-        );
+        // Swal.fire(
+        //   'Borrada',
+        //   `La lista "${list.name}" fue borrada correctamente`,
+        //   'success'
+        // );
+        // Dejo comentada esta alerta por si la quiero usar mas adelante
       }
     } catch (error) {
       setExpecting(false);
