@@ -18,11 +18,11 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 200px;
   margin-left: 200px;
   margin-top: 250px;
   margin-bottom: 100px;
-  background-color: #fe46a5;
-  width: 200px;
+  background-color: #577cf5;
 }
 
 .hijos {
@@ -30,6 +30,6 @@ body {
   height: 50px;
   text-align: center;
   padding-top: 15px;
-  border: 1px solid #ffffff;
-  color: #ffffff;
+  border: 1px solid #000000;
+  color: #000000;
 }

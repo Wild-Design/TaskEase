@@ -4,3 +4,88 @@
   align-items: center;
   width: 100%;
 }
+
+.addTaskContainer {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -o-border-radius: 7px;
+  margin-top: 8px;
+  width: 100%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.addTaskContainer svg {
+  font-size: 20px;
+}
+
+.addTaskContainer:hover {
+  background-color: #091e4224;
+}
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+  gap: 10px;
+}
+.cosoContainer {
+  width: 100%;
+  margin-top: 10px;
+}
+.textArea {
+  position: relative;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.3;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 70px;
+  max-height: 180px;
+  border-radius: 10px;
+  padding: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border: none;
+  outline: 2px solid #0c66e4;
+  box-shadow: 0 1px 1px #091e4240, 0 0 1px #091e424f;
+  overflow: hidden;
+}
+.textArea::-webkit-resizer {
+  display: none;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.buttonAddCard {
+  cursor: pointer;
+  font-size: 13px;
+  padding: 9px 13px;
+  background-color: #0c66e4;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border: none;
+  color: #fff;
+  margin-right: 10px;
+}
+.buttonAddCard:hover {
+  background-color: #083f8d;
+}
+.buttonCancel svg {
+  cursor: pointer;
+  font-size: 22px;
+}
