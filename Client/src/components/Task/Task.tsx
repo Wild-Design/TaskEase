@@ -73,7 +73,11 @@ export const Task: FC<Props> = ({ task }) => {
           )}
         </>
       ) : (
-        <textarea placeholder='Escrive aquí...' />
+        <textarea
+          className={styles.textArea}
+          autoFocus
+          placeholder='Escrive aquí...'
+        />
       )}
     </li>
   );
