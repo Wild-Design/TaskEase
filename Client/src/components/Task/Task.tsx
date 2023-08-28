@@ -33,39 +33,47 @@ export const Task: FC<Props> = ({ task }) => {
       alert('Error al borrar, intenta mas tarde queseyo');
     }
   };
+
+  const [input, setInput] = useState(false);
   return (
     <li
       onMouseEnter={() => setTaskHover(true)}
       onMouseLeave={() => setTaskHover(false)}
       className={styles.liContainer}
     >
-      <p className={styles.liContent}>{task.description}</p>
-      {taskHover && (
-        <div
-          className={`${styles.iconsContainer}  ${
-            changeDeleteButton && styles.iconsOff
-          }`}
-        >
-          <div className={styles.iconsDiv}>
-            <RiPencilLine />
-          </div>
-          <div onClick={handleDelete} className={styles.iconsDiv}>
-            <RiDeleteBinLine />
-          </div>
-        </div>
-      )}
-      {changeDeleteButton && (
-        <div className={styles.spinnerContainer}>
-          <ThreeDots
-            height='30'
-            width='30'
-            radius='9'
-            color='#4fa94d'
-            ariaLabel='three-dots-loading'
-            wrapperStyle={{}}
-            visible={true}
-          />
-        </div>
+      {!input ? (
+        <>
+          <p className={styles.liContent}>{task.description}</p>
+          {taskHover && (
+            <div
+              className={`${styles.iconsContainer}  ${
+                changeDeleteButton && styles.iconsOff
+              }`}
+            >
+              <div onClick={() => setInput(true)} className={styles.iconsDiv}>
+                <RiPencilLine />
+              </div>
+              <div onClick={handleDelete} className={styles.iconsDiv}>
+                <RiDeleteBinLine />
+              </div>
+            </div>
+          )}
+          {changeDeleteButton && (
+            <div className={styles.spinnerContainer}>
+              <ThreeDots
+                height='30'
+                width='30'
+                radius='9'
+                color='#4fa94d'
+                ariaLabel='three-dots-loading'
+                wrapperStyle={{}}
+                visible={true}
+              />
+            </div>
+          )}
+        </>
+      ) : (
+        <textarea placeholder='Escrive aquí...' />
       )}
     </li>
   );
