@@ -51,7 +51,7 @@ export const Task: FC<Props> = ({ task }) => {
         task.id,
         fullData?.user_name!,
         fullData?.password!,
-        newValue
+        newValue.trim()
       );
       setNewValue('');
       await dispatch(
