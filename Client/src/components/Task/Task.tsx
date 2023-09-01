@@ -3,9 +3,12 @@ import { ITask } from '../../interfaces';
 import styles from './Task.module.css';
 import { RiDeleteBinLine, RiPencilLine } from 'react-icons/ri';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { getFullDataUser } from '../../features/userSlice';
+import { getFullDataUser, setDragable } from '../../features/userSlice';
 import { deleteTask, updateTask } from '../../utils';
 import { ThreeDots } from 'react-loader-spinner';
+
+// import { useSortable } from '@dnd-kit/sortable';
+// import { CSS } from '@dnd-kit/utilities';
 
 interface Props {
   task: ITask;
@@ -38,7 +41,7 @@ export const Task: FC<Props> = ({ task }) => {
   const [newValue, setNewValue] = useState('');
   const [spinner, setSpinner] = useState(false);
 
-  const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>): void => {
     const { value } = event.target;
     setNewValue(value);
   };
@@ -65,10 +68,23 @@ export const Task: FC<Props> = ({ task }) => {
     const { key } = event;
     if (key === 'Enter') handleUpdateTask();
   };
+  //......................................................................
+  // const { attributes, listeners, setNodeRef, transform, transition } =
+  //   useSortable({ id: task.id });
+
+  // const style = {
+  //   transform: CSS.Transform.toString(transform),
+  //   transition,
+  // };
+  //......................................................................
   return (
     <>
       {!displayInput && !spinner ? (
         <li
+          // style={style}
+          // ref={setNodeRef}
+          // {...attributes}
+          // {...listeners}
           onMouseEnter={() => setTaskHover(true)}
           onMouseLeave={() => setTaskHover(false)}
           className={styles.liContainer}
@@ -79,6 +95,7 @@ export const Task: FC<Props> = ({ task }) => {
               className={`${styles.iconsContainer}  ${
                 changeDeleteButton && styles.iconsOff
               }`}
+              onMouseEnter={() => dispatch(setDragable())}
             >
               <div
                 onClick={() => setDisplayInput(true)}

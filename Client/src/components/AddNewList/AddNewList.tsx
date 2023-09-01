@@ -14,18 +14,18 @@ const AddNewList: FC = () => {
   const [inputValue, setInputValue] = useState(''); //Aquí solo tomo el valor del input
   const [charging, setCharging] = useState(false); //Aquí solo agrego el spinner de carga y quito los botones de agregar y borrar para que no hallan posibles problemas
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
     setInputValue(value);
   };
 
   const handleAddList = async (): Promise<void> => {
     try {
-      if (inputValue.trim().length > 0 && inputValue.length > 0) {
+      if (inputValue.trim().length >= 1 && inputValue.trim().length <= 20) {
         //compruevo que el input tenga al menos un caracter
         setCharging(true);
         await createList(
-          inputValue,
+          inputValue.trim(),
           fullData?.id!,
           fullData?.user_name!,
           fullData?.password!

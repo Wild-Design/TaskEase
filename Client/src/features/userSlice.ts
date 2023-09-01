@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios, { AxiosResponse } from 'axios';
-import { IFullDataUser } from '../interfaces/index';
+import { IFullDataUser, ITask } from '../interfaces/index';
 
 interface IState {
   fullData: IFullDataUser | null;
+  dragable: boolean;
 }
 
 const initialState: IState = {
   fullData: null,
+  dragable: true,
 };
 
 const userSlice = createSlice({
@@ -17,6 +19,18 @@ const userSlice = createSlice({
     getFullData: (state, action: PayloadAction<IFullDataUser>) => {
       state.fullData = action.payload;
     },
+    moveTasks: (
+      state,
+      action: PayloadAction<{ listId: string; newArray: ITask }>
+    ) => {
+      const list = state.fullData?.Lists.find(
+        (list) => list.id === action.payload.listId
+      );
+      console.log(list);
+    },
+    setDragable: (state) => {
+      state.dragable = !state.dragable;
+    },
   },
 });
 
@@ -24,8 +38,8 @@ export const getFullDataUser = (username: string, password: string) => {
   return async (dispatch: any) => {
     try {
       const fullData: AxiosResponse<IFullDataUser> = await axios.get(
-        // `http://localhost:3001/user/login/${username}/${password}`
-        `https://taskeaseserver.onrender.com/user/login/${username}/${password}`
+        `http://localhost:3001/user/login/${username}/${password}`
+        // `https://taskeaseserver.onrender.com/user/login/${username}/${password}`
       );
       fullData.data.password = password;
       dispatch(getFullData(fullData.data));
@@ -36,5 +50,5 @@ export const getFullDataUser = (username: string, password: string) => {
   };
 };
 
-export const { getFullData } = userSlice.actions;
+export const { getFullData, moveTasks, setDragable } = userSlice.actions;
 export default userSlice.reducer;

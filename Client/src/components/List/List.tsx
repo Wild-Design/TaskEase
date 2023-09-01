@@ -9,6 +9,13 @@ import { getFullDataUser } from '../../features/userSlice';
 import { updateList } from '../../utils';
 import { ThreeDots } from 'react-loader-spinner';
 
+// import { DndContext, DragEndEvent, closestCenter } from '@dnd-kit/core';
+// import {
+//   SortableContext,
+//   verticalListSortingStrategy,
+//   arrayMove,
+// } from '@dnd-kit/sortable';
+
 interface Props {
   list: IList;
 }
@@ -27,17 +34,17 @@ const List: FC<Props> = ({ list }) => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     setAddInputEdit(false); //Pongo en false para que se quite el input
-    if (inputValue.length > 20) {
+    if (inputValue.trim().length > 20) {
       return alert('¡Texto muy largo!,maximo 20 caracteres');
     }
-    if (inputValue.length >= 1) {
+    if (inputValue.trim().length >= 1) {
       //compruevo que al menos tenga un caracter y que no sean espacios para no hacer la petición al pedo
       setSpinnerListTitle(true); //agrego el spinner para avisar que esta cargando al user
       const update = await updateList(
         list.id,
         fullData?.user_name!,
         fullData?.password!,
-        inputValue
+        inputValue.trim()
       );
       !update
         ? alert('Error al editar la lista, intenta mas tarde.')
@@ -49,6 +56,18 @@ const List: FC<Props> = ({ list }) => {
     }
   };
 
+  //...........................................................................
+  // const { dragable } = useAppSelector((state) => state.userSlice);
+
+  // const handleDragEnd = (event: DragEndEvent): void => {
+  //   const { active, over } = event;
+  //   setChangeTask((task) => {
+  //     const oldIndex = list.Tasks.findIndex((task) => task.id === active.id);
+  //     const newIndex = list.Tasks.findIndex((task) => task.id === over!.id);
+  //     return arrayMove(list.Tasks, oldIndex, newIndex);
+  //   });
+  // };
+  //...........................................................................
   return (
     <div className={styles.list}>
       <div className={styles.headerContainer}>
@@ -90,11 +109,18 @@ const List: FC<Props> = ({ list }) => {
           <BsPencil />
         </div>
       </div>
+      {/* <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}> */}
       <ul className={styles.ul}>
+        {/* <SortableContext
+            items={list.Tasks}
+            strategy={verticalListSortingStrategy}
+          > */}
         {list.Tasks?.map((task) => (
           <Task key={task.id} listId={list.id} task={task} />
         ))}
+        {/* </SortableContext> */}
       </ul>
+      {/* </DndContext> */}
       <FinalListSection list={list} />
     </div>
   );
