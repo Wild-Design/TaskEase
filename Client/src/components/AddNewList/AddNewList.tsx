@@ -66,6 +66,7 @@ const AddNewList: FC = () => {
               type='text'
               placeholder='Introduzca el título de la lista...'
               disabled={charging}
+              maxLength={20}
             />
           </form>
 

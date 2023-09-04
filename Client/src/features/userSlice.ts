@@ -4,12 +4,10 @@ import { IFullDataUser, ITask } from '../interfaces/index';
 
 interface IState {
   fullData: IFullDataUser | null;
-  dragable: boolean;
 }
 
 const initialState: IState = {
   fullData: null,
-  dragable: true,
 };
 
 const userSlice = createSlice({
@@ -28,9 +26,6 @@ const userSlice = createSlice({
       );
       console.log(list);
     },
-    setDragable: (state) => {
-      state.dragable = !state.dragable;
-    },
   },
 });
 
@@ -42,6 +37,8 @@ export const getFullDataUser = (username: string, password: string) => {
         // `https://taskeaseserver.onrender.com/user/login/${username}/${password}`
       );
       fullData.data.password = password;
+      fullData.data.Lists.sort((a, b) => a.order - b.order);
+
       dispatch(getFullData(fullData.data));
       return true;
     } catch (error: any) {
@@ -50,5 +47,5 @@ export const getFullDataUser = (username: string, password: string) => {
   };
 };
 
-export const { getFullData, moveTasks, setDragable } = userSlice.actions;
+export const { getFullData, moveTasks } = userSlice.actions;
 export default userSlice.reducer;

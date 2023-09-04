@@ -9,12 +9,12 @@ import { getFullDataUser } from '../../features/userSlice';
 import { updateList } from '../../utils';
 import { ThreeDots } from 'react-loader-spinner';
 
-// import { DndContext, DragEndEvent, closestCenter } from '@dnd-kit/core';
-// import {
-//   SortableContext,
-//   verticalListSortingStrategy,
-//   arrayMove,
-// } from '@dnd-kit/sortable';
+import { DndContext, DragEndEvent, closestCorners } from '@dnd-kit/core';
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  arrayMove,
+} from '@dnd-kit/sortable';
 
 interface Props {
   list: IList;
@@ -57,16 +57,13 @@ const List: FC<Props> = ({ list }) => {
   };
 
   //...........................................................................
-  // const { dragable } = useAppSelector((state) => state.userSlice);
 
-  // const handleDragEnd = (event: DragEndEvent): void => {
-  //   const { active, over } = event;
-  //   setChangeTask((task) => {
-  //     const oldIndex = list.Tasks.findIndex((task) => task.id === active.id);
-  //     const newIndex = list.Tasks.findIndex((task) => task.id === over!.id);
-  //     return arrayMove(list.Tasks, oldIndex, newIndex);
-  //   });
-  // };
+  const handleDragEnd = (event: DragEndEvent): void => {
+    const { active, over } = event;
+
+    const oldIndex = list.Tasks.findIndex((task) => task.id === active.id);
+    const newIndex = list.Tasks.findIndex((task) => task.id === over!.id);
+  };
   //...........................................................................
   return (
     <div className={styles.list}>
@@ -109,18 +106,18 @@ const List: FC<Props> = ({ list }) => {
           <BsPencil />
         </div>
       </div>
-      {/* <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}> */}
-      <ul className={styles.ul}>
-        {/* <SortableContext
+      <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+        <ul className={styles.ul}>
+          <SortableContext
             items={list.Tasks}
             strategy={verticalListSortingStrategy}
-          > */}
-        {list.Tasks?.map((task) => (
-          <Task key={task.id} listId={list.id} task={task} />
-        ))}
-        {/* </SortableContext> */}
-      </ul>
-      {/* </DndContext> */}
+          >
+            {list.Tasks?.map((task) => (
+              <Task key={task.id} listId={list.id} task={task} />
+            ))}
+          </SortableContext>
+        </ul>
+      </DndContext>
       <FinalListSection list={list} />
     </div>
   );

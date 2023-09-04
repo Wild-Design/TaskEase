@@ -5,20 +5,21 @@ import modelList from './models/List.js';
 import { config } from 'dotenv';
 import bcrypt from 'bcrypt';
 config();
-// const { USER, PASSWORD, HOST, DB_PORT, DB_NAME } = process.env;
-const { DB_DEPLOY } = process.env;
-const sequelize = new Sequelize(
-// `postgres://${USER}:${PASSWORD}@${HOST}:${DB_PORT}/${DB_NAME}`,
-DB_DEPLOY, {
-    dialect: 'postgres',
-    dialectOptions: {
-        ssl: {
-            require: true,
-            rejectUnauthorized: false,
-        },
-    },
-    logging: false,
-});
+const { USER, PASSWORD, HOST, DB_PORT, DB_NAME } = process.env;
+// const { DB_DEPLOY } = process.env;
+const sequelize = new Sequelize(`postgres://${USER}:${PASSWORD}@${HOST}:${DB_PORT}/${DB_NAME}`
+// DB_DEPLOY!,
+// {
+//   dialect: 'postgres',
+//   dialectOptions: {
+//     ssl: {
+//       require: true,
+//       rejectUnauthorized: false,
+//     },
+//   },
+//   logging: false,
+// }
+);
 modelUser(sequelize);
 modelTask(sequelize);
 modelList(sequelize);

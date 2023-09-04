@@ -10,5 +10,10 @@ export default (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        order: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            allowNull: false,
+        },
     }, { timestamps: false });
 };

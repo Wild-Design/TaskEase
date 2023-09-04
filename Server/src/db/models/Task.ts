@@ -13,6 +13,11 @@ export default (sequelize: Sequelize) => {
         type: DataTypes.STRING(700),
         allowNull: false,
       },
+      order: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+      },
     },
     { timestamps: false }
   );

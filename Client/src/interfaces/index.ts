@@ -12,6 +12,7 @@ export interface IFullDataUser {
 export interface IList {
   id: string;
   name: string;
+  order: number;
   UserId: string;
   Tasks: ITask[];
 }
@@ -19,4 +20,5 @@ export interface IList {
 export interface ITask {
   id: string;
   description: string;
+  order: number;
 }
