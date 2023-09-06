@@ -1,9 +1,11 @@
 .container {
   display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
   justify-content: center;
   align-items: center;
+  color: #fff;
 }
 
 .form {
@@ -22,9 +24,14 @@
   -o-border-radius: 20px;
 }
 
+.error {
+  font-size: 15px;
+  color: rgb(238, 255, 0);
+}
 .inputsContainer {
   display: flex;
-  padding: 10px;
+  align-items: center;
+  padding: 8px;
   width: 80%;
   border-radius: 10px;
   background-color: #50b7e7;
@@ -34,13 +41,19 @@
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
+.inputsContainer label {
+  display: flex;
+  cursor: pointer;
+}
 .inputsContainer svg {
   cursor: pointer;
+  font-size: 20px;
   color: #fff;
   margin-right: 10px;
 }
 
 .inputsContainer input {
+  padding: 5px;
   border: none;
   outline: none;
   color: #fff;
@@ -48,12 +61,39 @@
 }
 
 .inputsContainer input::placeholder {
-  color: #fff;
-}
-.inputsContainer input:-webkit-autofill {
-  background-color: #cccccc;
+  color: #d0d0d0;
 }
 
-.inputsContainer input:-webkit-autofill:focus {
-  background-color: #fff;
+.inputsContainer input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  padding: 5px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 0px 1000px rgb(128, 128, 253) inset;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+
+.inputsContainer img {
+  width: 30px;
+}
+.eyeContainer {
+  display: flex;
+  cursor: pointer;
+}
+.loaderContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(4, 4, 65, 0.655);
+}
+
+.loaderContainer p {
+  font-size: 25px;
 }

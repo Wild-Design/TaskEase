@@ -18,7 +18,7 @@ function App() {
                 <title>TaskEase</title>
                 <meta name='description' content='Pagina inicial de TaskEase' />
               </Helmet>
-              <h1>Hola Mundo!</h1>
+              <h1>LandingPage</h1>
               <button onClick={() => navigate('/home')}>Home</button>
             </>
           }

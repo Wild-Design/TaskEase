@@ -24,8 +24,8 @@ export const register = async (req, res) => {
                 .status(404)
                 .send('¡user_name, email and password are required!');
         }
-        const usernameRegex = /^(?!.*\s.*\s)[a-zA-Z ]{6,15}$/;
-        const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,15}$/;
+        const usernameRegex = /^(?!.*\s.*\s)[a-zA-Z ]{6,20}$/;
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,20}$/;
         const emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
         if (!usernameRegex.test(user_name))
             return res

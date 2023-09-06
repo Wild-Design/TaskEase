@@ -7,8 +7,8 @@ import { getFullDataUser } from '../../features/userSlice';
 import { deleteTask, updateTask } from '../../utils';
 import { ThreeDots } from 'react-loader-spinner';
 
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+// import { useSortable } from '@dnd-kit/sortable';
+// import { CSS } from '@dnd-kit/utilities';
 
 interface Props {
   task: ITask;
@@ -69,22 +69,22 @@ export const Task: FC<Props> = ({ task }) => {
     if (key === 'Enter') handleUpdateTask();
   };
   //......................................................................
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: task.id });
+  // const { attributes, listeners, setNodeRef, transform, transition } =
+  //   useSortable({ id: task.id });
 
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
+  // const style = {
+  //   transform: CSS.Transform.toString(transform),
+  //   transition,
+  // };
   //......................................................................
   return (
     <>
       {!displayInput && !spinner ? (
         <li
-          style={style}
-          ref={setNodeRef}
-          {...attributes}
-          {...listeners}
+          // style={style}
+          // ref={setNodeRef}
+          // {...attributes}
+          // {...listeners}
           onMouseEnter={() => setTaskHover(true)}
           onMouseLeave={() => setTaskHover(false)}
           className={styles.liContainer}
@@ -97,11 +97,7 @@ export const Task: FC<Props> = ({ task }) => {
               }`}
             >
               <div
-                onClick={(event: any) => {
-                  event.stopPropagation();
-                  setDisplayInput(true);
-                  console.log('clik');
-                }}
+                onClick={() => setDisplayInput(true)}
                 className={styles.iconsDiv}
               >
                 <RiPencilLine />
