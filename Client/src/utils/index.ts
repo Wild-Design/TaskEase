@@ -4,7 +4,7 @@ export const userRegister = async (
   user_name: string,
   email: string,
   password: string
-): Promise<boolean | undefined> => {
+): Promise<boolean | string> => {
   try {
     const register: AxiosResponse<string> = await axios.post(
       `http://localhost:3001/user/register`,
@@ -17,7 +17,8 @@ export const userRegister = async (
     );
     return register ? true : false;
   } catch (error: any) {
-    console.log(error.message);
+    const { data } = error.response;
+    return data;
   }
 };
 

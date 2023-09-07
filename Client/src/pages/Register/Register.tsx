@@ -18,8 +18,12 @@ const Register: FC = () => {
     event.preventDefault();
     const { user_name, email, password } = data;
     const register = await userRegister(user_name, email, password);
-    if (register) navigate('/login');
-    else return console.log('No se pudo registrar el usuario');
+    if (register === true) return navigate('/login');
+    if (register === 'This username is already in use')
+      alert('Ya existe un usuario con ese mismo nombre');
+    if (register === 'This email is already in use')
+      alert('Este email ya se encuentra en uso');
+    else alert('No se pudo registrar el usuario');
   };
   return (
     <>
