@@ -7,8 +7,8 @@ import { getFullDataUser } from '../../features/userSlice';
 import { deleteTask, updateTask } from '../../utils';
 import { ThreeDots } from 'react-loader-spinner';
 
-// import { useSortable } from '@dnd-kit/sortable';
-// import { CSS } from '@dnd-kit/utilities';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 interface Props {
   task: ITask;
@@ -24,7 +24,8 @@ export const Task: FC<Props> = ({ task }) => {
 
   const [changeDeleteButton, setChangeDeleteButton] = useState(false);
 
-  const handleDelete = async (): Promise<void> => {
+  const handleDelete = async (event: any): Promise<void> => {
+    event.stopPropagation();
     try {
       setChangeDeleteButton(true);
       await deleteTask(task.id, fullData?.user_name!, fullData?.password!);
@@ -38,12 +39,14 @@ export const Task: FC<Props> = ({ task }) => {
   };
 
   const [displayInput, setDisplayInput] = useState(false);
-  const [newValue, setNewValue] = useState('');
   const [spinner, setSpinner] = useState(false);
+  const [newValue, setNewValue] = useState('');
+  const [textAreaValue, setTextArea] = useState(task.description);
 
   const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>): void => {
     const { value } = event.target;
     setNewValue(value);
+    setTextArea(value);
   };
   const handleUpdateTask = async (): Promise<void> => {
     setDisplayInput(false);
@@ -69,22 +72,23 @@ export const Task: FC<Props> = ({ task }) => {
     if (key === 'Enter') handleUpdateTask();
   };
   //......................................................................
-  // const { attributes, listeners, setNodeRef, transform, transition } =
-  //   useSortable({ id: task.id });
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: task.id });
 
-  // const style = {
-  //   transform: CSS.Transform.toString(transform),
-  //   transition,
-  // };
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
   //......................................................................
+
   return (
     <>
       {!displayInput && !spinner ? (
         <li
-          // style={style}
-          // ref={setNodeRef}
-          // {...attributes}
-          // {...listeners}
+          style={style}
+          ref={setNodeRef}
+          {...attributes}
+          {...listeners}
           onMouseEnter={() => setTaskHover(true)}
           onMouseLeave={() => setTaskHover(false)}
           className={styles.liContainer}
@@ -142,7 +146,7 @@ export const Task: FC<Props> = ({ task }) => {
             onKeyDown={handleKeyDown}
             className={styles.textArea}
             autoFocus
-            placeholder={task.description}
+            value={textAreaValue}
           />
         </div>
       )}

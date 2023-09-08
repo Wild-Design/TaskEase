@@ -9,12 +9,12 @@ import { getFullDataUser } from '../../features/userSlice';
 import { updateList } from '../../utils';
 import { ThreeDots } from 'react-loader-spinner';
 
-// import { DndContext, DragEndEvent, closestCorners } from '@dnd-kit/core';
-// import {
-//   SortableContext,
-//   verticalListSortingStrategy,
-//   arrayMove,
-// } from '@dnd-kit/sortable';
+import { DndContext, DragEndEvent, closestCorners } from '@dnd-kit/core';
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  arrayMove,
+} from '@dnd-kit/sortable';
 
 interface Props {
   list: IList;
@@ -25,16 +25,20 @@ const List: FC<Props> = ({ list }) => {
 
   const [addInputEdit, setAddInputEdit] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [initialTextAreaValue, setInitialTextAreaValue] = useState(list.name);
   const [spinnerListTitle, setSpinnerListTitle] = useState(false);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setInputValue(value.trim());
+    setInitialTextAreaValue(value);
   };
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     setAddInputEdit(false); //Pongo en false para que se quite el input
-    if (inputValue.trim().length > 20) {
+    setInputValue(inputValue.trim());
+    setInitialTextAreaValue(initialTextAreaValue.trim());
+    if (inputValue.length > 20) {
       return alert('¡Texto muy largo!,maximo 20 caracteres');
     }
     if (inputValue.trim().length >= 1) {
@@ -58,12 +62,12 @@ const List: FC<Props> = ({ list }) => {
 
   //...........................................................................
 
-  // const handleDragEnd = (event: DragEndEvent): void => {
-  //   const { active, over } = event;
+  const handleDragEnd = (event: DragEndEvent): void => {
+    const { active, over } = event;
 
-  //   const oldIndex = list.Tasks.findIndex((task) => task.id === active.id);
-  //   const newIndex = list.Tasks.findIndex((task) => task.id === over!.id);
-  // };
+    const oldIndex = list.Tasks.findIndex((task) => task.id === active.id);
+    const newIndex = list.Tasks.findIndex((task) => task.id === over!.id);
+  };
   //...........................................................................
   return (
     <div className={styles.list}>
@@ -92,13 +96,12 @@ const List: FC<Props> = ({ list }) => {
               className={styles.input}
               type='text'
               autoFocus
-              placeholder={list.name}
               onBlur={handleSubmit}
               maxLength={20}
+              value={initialTextAreaValue}
             />
           </form>
         )}
-
         <div
           onClick={() => setAddInputEdit(true)}
           className={styles.pencilContainer}
@@ -106,18 +109,18 @@ const List: FC<Props> = ({ list }) => {
           <BsPencil />
         </div>
       </div>
-      {/* <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}> */}
-      <ul className={styles.ul}>
-        {/* <SortableContext
+      <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+        <ul className={styles.ul}>
+          <SortableContext
             items={list.Tasks}
             strategy={verticalListSortingStrategy}
-          > */}
-        {list.Tasks?.map((task) => (
-          <Task key={task.id} listId={list.id} task={task} />
-        ))}
-        {/* </SortableContext> */}
-      </ul>
-      {/* </DndContext> */}
+          >
+            {list.Tasks?.map((task) => (
+              <Task key={task.id} listId={list.id} task={task} />
+            ))}
+          </SortableContext>
+        </ul>
+      </DndContext>
       <FinalListSection list={list} />
     </div>
   );

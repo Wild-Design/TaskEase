@@ -30,6 +30,7 @@
   width: 210px;
   margin-top: 50px;
   padding: 7px 5px;
+  color: var(--font-color);
   border: none;
   outline: 2px solid #0c66e4;
   margin: 0px 0px 10px 3px;

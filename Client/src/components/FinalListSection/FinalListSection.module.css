@@ -43,6 +43,7 @@
   font-weight: 400;
   font-size: 15px;
   line-height: 1.3;
+  color: var(--font-color);
   min-width: 100%;
   max-width: 100%;
   min-height: 70px;
