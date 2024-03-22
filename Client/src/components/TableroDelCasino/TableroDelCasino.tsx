@@ -13,6 +13,7 @@ const TableroDelCasino = () => {
   for (let i = desde; i <= hasta; i++) {
     numbers.push(i);
   }
+
   return (
     <>
       <input type='range' min={100} max={1500} onChange={handleRangeChange} />
